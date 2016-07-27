@@ -14,3 +14,8 @@ $Login = Read-Host -Prompt "Login"
 
 $response = Read-host "Password" -AsSecureString
 $password = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($response))
+
+# Change the password
+. "$($thisDir)\ChangePassword\ChangePassword.ps1"
+
+
