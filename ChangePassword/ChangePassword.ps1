@@ -35,7 +35,8 @@ if ($(PromptForChangePassword($login)) -eq $TRUE)
     $changePasswordCommand = """echo -e $($password)\\n$($NewPassword)\\n$($ConfirmedPassword) | passwd"""
 
     try{        
-        ./plink.exe -ssh "192.168.1.10" -l $login -pw $password $changePasswordCommand > "$thisDir\output.txt"
+        ./plink.exe -ssh $ipAddress -l $login -pw $password $changePasswordCommand > "$thisDir\output.txt"
+        $password = $ConfirmedPassword
     }
     catch{
         Write-Output "AN EXCEPTION!!"

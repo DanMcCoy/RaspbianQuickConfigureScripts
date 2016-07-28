@@ -33,4 +33,6 @@ if ($(PromptForSetStaticIP($login)) -eq $TRUE)
     (Get-Content "$thisDir\Network\interfaces").replace('network [[network]]', "network $network") | Set-Content "$thisDir\Network\interfaces"
     (Get-Content "$thisDir\Network\interfaces").replace('broadcast [[broadcast]]', "broadcast $broadcast") | Set-Content "$thisDir\Network\interfaces"
 
+    ./pscp -pw $password $thisDir\Network\interfaces $login@$($ipAddress):/etc/network
+
 }
