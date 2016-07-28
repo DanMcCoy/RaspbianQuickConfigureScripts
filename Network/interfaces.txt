@@ -1,0 +1,14 @@
+# Include files from /etc/network/interfaces.d:
+source-directory /etc/network/interfaces.d
+
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet static
+
+address [[address]]
+gateway [[gateway]]
+netmask 255.255.255.0
+network [[network]]
+broadcast [[broadcast]]
