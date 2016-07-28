@@ -10,7 +10,7 @@
         "",
         "Change the password for $($userName)?",
         $choices,
-        0)
+        1)
 
     if ($answer -eq 1){
         $returnValue = $FALSE;
