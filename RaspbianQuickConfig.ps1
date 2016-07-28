@@ -10,10 +10,14 @@ $login = ""
 $password = ""
 
 $ipAddress = Read-Host -Prompt "IP address"
-$Login = Read-Host -Prompt "Login"
+$login = Read-Host -Prompt "Login"
 
 $response = Read-host "Password" -AsSecureString
 $password = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($response))
+
+cd "C:\Program Files (x86)\PuTTY"
+
+Write-Output ""
 
 # Change the password
 . "$($thisDir)\ChangePassword\ChangePassword.ps1"

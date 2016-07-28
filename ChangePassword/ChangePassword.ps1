@@ -20,6 +20,29 @@
 
 if ($(PromptForChangePassword($login)) -eq $TRUE)
 {
-    Write-Output "Ok, changing...."
+    $response = Read-host "New password" -AsSecureString
+    $NewPassword = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($response))
+
+    $response = Read-host "Confirm new password" -AsSecureString
+    $ConfirmedPassword = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($response))
+
+    if ($NewPassword -ne $ConfirmedPassword){
+        Write-Output "Passwords do not match!"
+        exit
+    }
+    Write-Output ""
+
+    $changePasswordCommand = """echo -e $($password)\\n$($NewPassword)\\n$($ConfirmedPassword) | passwd"""
+
+    try{        
+        ./plink.exe -ssh "192.168.1.10" -l $login -pw $password $changePasswordCommand > "$thisDir\output.txt"
+    }
+    catch{
+        Write-Output "AN EXCEPTION!!"
+        Write-Output $_.Exception.Message
+    }
+    Write-Output ""
+    Get-Content "$thisDir\output.txt"
+    Write-Output ""
 }
 
