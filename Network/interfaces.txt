@@ -12,5 +12,3 @@ gateway [[gateway]]
 netmask 255.255.255.0
 network [[network]]
 broadcast [[broadcast]]
-
-#This is a test
