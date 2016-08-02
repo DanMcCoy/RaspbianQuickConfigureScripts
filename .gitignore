@@ -1,2 +1,3 @@
 output.txt
 Network/interfaces
+Network/dhcpcd.conf

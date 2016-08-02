@@ -13,9 +13,10 @@ Write-Output ""
 
 #variables
 $thisDir = Split-Path -Path $MyInvocation.MyCommand.Definition -Parent
-#$ipAddress = ""
-#$login = ""
 $password = ""
+
+. "$($thisDir)\CommonFunctions.ps1"
+
 
 if ($ipAddress -eq $null -Or $ipAddress -eq ""){
     $ipAddress = Read-Host -Prompt "IP address"
