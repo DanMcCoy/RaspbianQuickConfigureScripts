@@ -42,4 +42,9 @@ Write-Output ""
 
 Write-Output ""
 
+# Set the hostname
+. "$($thisDir)\Network\SetHostname.ps1"
+
+Write-Output ""
+
 
