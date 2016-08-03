@@ -47,4 +47,34 @@ Write-Output ""
 
 Write-Output ""
 
+# Set timezone to London
+if ($(YesNoPrompt "Set time zone to London?" 1) -eq $TRUE)
+{
+    ./plink.exe -ssh $ipAddress -l $login -pw $password "sudo cp /usr/share/zoneinfo/Europe/London /etc/localtime --verbose"  > "$thisDir\output.txt"
+    Get-Content "$thisDir\output.txt"
+    Write-Output ""
+}
+
+
+# Update and upgrade
+if ($(YesNoPrompt "Update package list?" 1) -eq $TRUE)
+{
+    Write output "Updating package list, please wait..."
+    ./plink.exe -ssh $ipAddress -l $login -pw $password "sudo apt-get update"  > "$thisDir\output.txt"
+    Get-Content "$thisDir\output.txt"
+    Write-Output ""
+}
+
+Write-Output ""
+
+if ($(YesNoPrompt "Upgrade installed packages?" 1) -eq $TRUE)
+{
+    Write output "Upgrading installed packages, please wait..."
+    ./plink.exe -ssh $ipAddress -l $login -pw $password "sudo apt-get dist-upgrade"  > "$thisDir\output.txt"
+    Get-Content "$thisDir\output.txt"
+    Write-Output ""
+}
+
+Write-Output ""
+
 
