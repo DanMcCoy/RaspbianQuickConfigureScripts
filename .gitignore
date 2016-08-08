@@ -3,3 +3,4 @@ Network/interfaces
 Network/dhcpcd.conf
 Network/hostname
 Network/hosts
+MariaDB/AddNewAdminUser.bash
