@@ -1,0 +1,2 @@
+mysql -uroot -p[[root_password]] -e "CREATE USER [[new_user_name]]@'[[new_user_ip]]' IDENTIFIED BY '[[new_user_password]]';"
+mysql -uroot -p[[root_password]] -e "GRANT ALL PRIVILEGES ON *.* TO '[[new_user_name]]'@'[[new_user_ip]]';"

@@ -83,5 +83,10 @@ Write-Output ""
 
 Write-Output ""
 
+# Install MySql
+. "$($thisDir)\MySql\MySql.ps1"
+
+Write-Output ""
+
 cd $thisDir
 

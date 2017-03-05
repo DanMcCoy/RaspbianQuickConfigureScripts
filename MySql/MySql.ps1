@@ -1,7 +1,7 @@
 $dbRootPassword = $null
 $dbRootPasswordConfirm = $null
 
-if ($(YesNoPrompt "Install MariaDB?" 1) -eq $TRUE)
+if ($(YesNoPrompt "Install MySql?" 1) -eq $TRUE)
 {
     $response = Read-host "Root user password" -AsSecureString
     $dbRootPassword = [Runtime.InteropServices.Marshal]::PtrToStringAuto([Runtime.InteropServices.Marshal]::SecureStringToBSTR($response))
@@ -14,18 +14,18 @@ if ($(YesNoPrompt "Install MariaDB?" 1) -eq $TRUE)
         exit
     }
 
-    $installFileName = "InstallMariaDB"
+    $installFileName = "InstallMySql"
 
     #make a copy of the file
-    Copy-Item "$thisDir\MariaDB\$installFileName.txt" "$thisDir\MariaDB\$installFileName.bash"
+    Copy-Item "$thisDir\MySql\$installFileName.txt" "$thisDir\MySql\$installFileName.bash"
 
     #set the variables in the processed bash script
-    (Get-Content "$thisDir\MariaDB\$installFileName.bash").replace('[[root_password]]', "$dbRootPassword") | Set-Content "$thisDir\MariaDB\$installFileName.bash"
-    (Get-Content "$thisDir\MariaDB\$installFileName.bash").replace('[[root_password_confirm]]', "$dbRootPasswordConfirm") | Set-Content "$thisDir\MariaDB\$installFileName.bash"
+    (Get-Content "$thisDir\MySql\$installFileName.bash").replace('[[root_password]]', "$dbRootPassword") | Set-Content "$thisDir\MySql\$installFileName.bash"
+    (Get-Content "$thisDir\MySql\$installFileName.bash").replace('[[root_password_confirm]]', "$dbRootPasswordConfirm") | Set-Content "$thisDir\MySql\$installFileName.bash"
 
     #Run the bash script on the linux box
     cd "C:\Program Files (x86)\PuTTY"
-    ./plink.exe -ssh $ipAddress -l $login -pw $password -m "$thisDir\MariaDB\$installFileName.bash" > "$thisDir\output.txt"
+    ./plink.exe -ssh $ipAddress -l $login -pw $password -m "$thisDir\MySql\$installFileName.bash" > "$thisDir\output.txt"
     Get-Content "$thisDir\output.txt"
 
     Write-Output ""
@@ -55,18 +55,18 @@ if ($(YesNoPrompt "Install MariaDB?" 1) -eq $TRUE)
         $addUserFileName = "AddNewAdminUser"
 
         #make a copy of the file
-        Copy-Item "$thisDir\MariaDB\$addUserFileName.txt" "$thisDir\MariaDB\$addUserFileName.bash"
+        Copy-Item "$thisDir\MySql\$addUserFileName.txt" "$thisDir\MySql\$addUserFileName.bash"
 
         #set the variables in the processed bash script
-        (Get-Content "$thisDir\MariaDB\$addUserFileName.bash").replace('[[root_password]]', "$dbRootPassword") | Set-Content "$thisDir\MariaDB\$addUserFileName.bash"
-        (Get-Content "$thisDir\MariaDB\$addUserFileName.bash").replace('[[root_password_confirm]]', "$dbRootPasswordConfirm") | Set-Content "$thisDir\MariaDB\$addUserFileName.bash"
-        (Get-Content "$thisDir\MariaDB\$addUserFileName.bash").replace('[[new_user_name]]', "$newUserName") | Set-Content "$thisDir\MariaDB\$addUserFileName.bash"
-        (Get-Content "$thisDir\MariaDB\$addUserFileName.bash").replace('[[new_user_ip]]', "$newUserIP") | Set-Content "$thisDir\MariaDB\$addUserFileName.bash"
-        (Get-Content "$thisDir\MariaDB\$addUserFileName.bash").replace('[[new_user_password]]', "$newUserPassword") | Set-Content "$thisDir\MariaDB\$addUserFileName.bash"
+        (Get-Content "$thisDir\MySql\$addUserFileName.bash").replace('[[root_password]]', "$dbRootPassword") | Set-Content "$thisDir\MySql\$addUserFileName.bash"
+        (Get-Content "$thisDir\MySql\$addUserFileName.bash").replace('[[root_password_confirm]]', "$dbRootPasswordConfirm") | Set-Content "$thisDir\MySql\$addUserFileName.bash"
+        (Get-Content "$thisDir\MySql\$addUserFileName.bash").replace('[[new_user_name]]', "$newUserName") | Set-Content "$thisDir\MySql\$addUserFileName.bash"
+        (Get-Content "$thisDir\MySql\$addUserFileName.bash").replace('[[new_user_ip]]', "$newUserIP") | Set-Content "$thisDir\MySql\$addUserFileName.bash"
+        (Get-Content "$thisDir\MySql\$addUserFileName.bash").replace('[[new_user_password]]', "$newUserPassword") | Set-Content "$thisDir\MySql\$addUserFileName.bash"
 
         #Run the bash script on the linux box
         cd "C:\Program Files (x86)\PuTTY"
-        ./plink.exe -ssh $ipAddress -l $login -pw $password -m "$thisDir\MariaDB\$addUserFileName.bash" > "$thisDir\output.txt"
+        ./plink.exe -ssh $ipAddress -l $login -pw $password -m "$thisDir\MySql\$addUserFileName.bash" > "$thisDir\output.txt"
         Get-Content "$thisDir\output.txt"
 
         Write-Output ""
