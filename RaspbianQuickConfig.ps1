@@ -78,6 +78,28 @@ if ($(YesNoPrompt "Upgrade installed packages?" 1) -eq $TRUE)
 
 Write-Output ""
 
+# Install screen
+if ($(YesNoPrompt "Install Screen?" 1) -eq $TRUE)
+{
+    Write-Output "Installing Screen, please wait..."
+    ./plink.exe -ssh $ipAddress -l $login -pw $password "sudo apt-get install screen"  > "$thisDir\output.txt"
+    Get-Content "$thisDir\output.txt"
+    Write-Output ""
+}
+
+Write-Output ""
+
+# Install Midnight Commander
+if ($(YesNoPrompt "Install Midnight Commander?" 1) -eq $TRUE)
+{
+    Write-Output "Installing Midnight Commander, please wait..."
+    ./plink.exe -ssh $ipAddress -l $login -pw $password "sudo apt-get install mc"  > "$thisDir\output.txt"
+    Get-Content "$thisDir\output.txt"
+    Write-Output ""
+}
+
+Write-Output ""
+
 # Install MariaDB
 . "$($thisDir)\MariaDB\MariaDB.ps1"
 
@@ -87,6 +109,8 @@ Write-Output ""
 . "$($thisDir)\MySql\MySql.ps1"
 
 Write-Output ""
+
+
 
 cd $thisDir
 
