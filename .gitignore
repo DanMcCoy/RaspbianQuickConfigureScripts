@@ -3,4 +3,8 @@ Network/interfaces
 Network/dhcpcd.conf
 Network/hostname
 Network/hosts
+Network/MountNas.bash
 MariaDB/AddNewAdminUser.bash
+MySql/InstallMaria.bash
+MySql/AddNewAdminUser.bash
+MySql/InstallMySql.bash

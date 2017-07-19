@@ -78,13 +78,12 @@ if ($(YesNoPrompt "Upgrade installed packages?" 1) -eq $TRUE)
 
 Write-Output ""
 
-# Install screen
+# Install Screen
 if ($(YesNoPrompt "Install Screen?" 1) -eq $TRUE)
 {
     Write-Output "Installing Screen, please wait..."
-    ./plink.exe -ssh $ipAddress -l $login -pw $password "sudo apt-get install screen"  > "$thisDir\output.txt"
+    ./plink.exe -ssh $ipAddress -l $login -pw $password "sudo DEBIAN_FRONTEND=noninteractive apt-get -y install screen"  > "$thisDir\output.txt"
     Get-Content "$thisDir\output.txt"
-    Write-Output ""
 }
 
 Write-Output ""
@@ -93,10 +92,24 @@ Write-Output ""
 if ($(YesNoPrompt "Install Midnight Commander?" 1) -eq $TRUE)
 {
     Write-Output "Installing Midnight Commander, please wait..."
-    ./plink.exe -ssh $ipAddress -l $login -pw $password "sudo apt-get install mc"  > "$thisDir\output.txt"
+    ./plink.exe -ssh $ipAddress -l $login -pw $password "sudo DEBIAN_FRONTEND=noninteractive apt-get -y install mc"  > "$thisDir\output.txt"
     Get-Content "$thisDir\output.txt"
-    Write-Output ""
 }
+
+Write-Output ""
+
+# Install ntfs-3g
+if ($(YesNoPrompt "Install ntfs-3g?" 1) -eq $TRUE)
+{
+    Write-Output "Installing ntfs-3g, please wait..."
+    ./plink.exe -ssh $ipAddress -l $login -pw $password "sudo DEBIAN_FRONTEND=noninteractive apt-get -y install ntfs-3g"  > "$thisDir\output.txt"
+    Get-Content "$thisDir\output.txt"
+}
+
+Write-Output ""
+
+# Mount NAS drive
+. "$($thisDir)\Network\MountNas.ps1"
 
 Write-Output ""
 
@@ -107,6 +120,16 @@ Write-Output ""
 
 # Install MySql
 . "$($thisDir)\MySql\MySql.ps1"
+
+Write-Output ""
+
+if ($(YesNoPrompt "Upgrade installed packages (again)?" 1) -eq $TRUE)
+{
+    Write output "Upgrading installed packages, please wait..."
+    ./plink.exe -ssh $ipAddress -l $login -pw $password "sudo apt-get dist-upgrade" > "$thisDir\output.txt"
+    Get-Content "$thisDir\output.txt"
+    Write-Output ""
+}
 
 Write-Output ""
 

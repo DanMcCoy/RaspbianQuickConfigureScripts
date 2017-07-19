@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Writing to fstab file"
+
+sudo sh -c 'echo "[[network_path]] [[mount_path]] cifs username=[[user_name]],password=[[password]],_netdev,iocharset=utf8 0 0" >> /etc/fstab'
