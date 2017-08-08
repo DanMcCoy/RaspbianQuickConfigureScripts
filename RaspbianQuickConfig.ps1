@@ -61,7 +61,7 @@ Write-Output ""
 if ($(YesNoPrompt "Update package list?" 1) -eq $TRUE)
 {
     Write-Output "Updating package list, please wait..."
-    ./plink.exe -ssh $ipAddress -l $login -pw $password "sudo apt-get update"  > "$thisDir\output.txt"
+    ./plink.exe -ssh $ipAddress -l $login -pw $password "sudo apt-get -y update"  > "$thisDir\output.txt"
     Get-Content "$thisDir\output.txt"
     Write-Output ""
 }
@@ -71,7 +71,7 @@ Write-Output ""
 if ($(YesNoPrompt "Upgrade installed packages?" 1) -eq $TRUE)
 {
     Write output "Upgrading installed packages, please wait..."
-    ./plink.exe -ssh $ipAddress -l $login -pw $password "sudo apt-get dist-upgrade" > "$thisDir\output.txt"
+    ./plink.exe -ssh $ipAddress -l $login -pw $password "sudo apt-get -y dist-upgrade" > "$thisDir\output.txt"
     Get-Content "$thisDir\output.txt"
     Write-Output ""
 }
@@ -126,7 +126,7 @@ Write-Output ""
 if ($(YesNoPrompt "Upgrade installed packages (again)?" 1) -eq $TRUE)
 {
     Write output "Upgrading installed packages, please wait..."
-    ./plink.exe -ssh $ipAddress -l $login -pw $password "sudo apt-get dist-upgrade" > "$thisDir\output.txt"
+    ./plink.exe -ssh $ipAddress -l $login -pw $password "sudo apt-get -y dist-upgrade" > "$thisDir\output.txt"
     Get-Content "$thisDir\output.txt"
     Write-Output ""
 }
